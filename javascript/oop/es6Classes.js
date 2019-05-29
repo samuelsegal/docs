@@ -13,6 +13,21 @@ const samo = new Human('Samo', 'souped up');
 console.log(samo.think());
 console.log(samo instanceof Human);
 
-const trick = new Human('Samo', 'full of trickery');
-console.log(trick.think());
-console.log(trick instanceof Human);
+const tricky = new Human('Tricky', 'full of trickery');
+console.log(tricky.think());
+console.log(tricky instanceof Human);
+
+class Asian extends Human {
+	constructor(name, brain, language) {
+		super(name, brain);
+		this.language = language;
+	}
+	think() {
+		return `${super.think()}.\nMy language of choice is  ${this.language}`;
+	}
+}
+
+const ybing = new Asian('Ybing', 'Asian', 'Mandarin');
+console.log(ybing.think());
+console.log(Human.prototype.isPrototypeOf(ybing));
+console.log(`Ybing is an Asian Human Object: ${ybing instanceof (Asian && Human && Object)}`);
