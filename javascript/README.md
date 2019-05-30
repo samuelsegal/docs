@@ -87,6 +87,33 @@ const partialMultiplyBy3 = mul.bind(null, 3);
 partialMultiplyBy3(8,2);
 ```
 
+11. Memoization = Caching. Below is technique used in Dynamic programming alot.
+
+```
+function memoizeAdd30(n){
+    let chache = {};
+    //to handle state internal without introducing global variable we can use closure like the following inner function;
+    return function(n){
+        if(n in cache){
+            return cache[n];
+        } else {
+            console.log('computing long calculation that should be cached)
+            cache[n] = n + 30;
+            return cache[n];
+        }
+    }
+}
+
+const executioner = memoizeAdd30();
+
+console.log(executioner(2));
+console.log(executioner(2));
+console.log(executioner(2));
+console.log(executioner(30));
+console.log(executioner(30));
+
+```
+
 ### Why be functional?
 
 ### References:
