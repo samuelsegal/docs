@@ -1,3 +1,5 @@
+//This class documents what I learned in aneagoie excellent advanced javascript course
+//This was my first attempt to solve before learning about compose and pipe.
 // Amazon shopping
 const user = {
 	name: 'Kim',

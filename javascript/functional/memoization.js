@@ -1,5 +1,6 @@
 const loggy = require('../loggy');
 function memoizeAdd30(n) {
+	//cache object for closure.
 	let cache = {};
 	//to handle state internal without introducing global variable we can use closure like the following inner function;
 	return function(n) {
