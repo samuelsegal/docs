@@ -1,6 +1,6 @@
 ## 2 Pillars of Javascript
 
-1. closure - inner functions have access to outter functions variables
+1. closure - a function that returns a function having access to variables in its lexical environment.
 
 ```
 function holdonto(me){
@@ -11,6 +11,37 @@ function holdonto(me){
 }
 const holder = holdonto('samo')
 holder();
+```
+
+-   Simulates private functions in javascript.
+
+```
+var points = (function() {
+var privatePoints = 0;
+function update(val) {
+privatePoints += val;
+}
+return {
+increment: function() {
+	update(1);
+},
+incrementBy: function(val) {
+	update(val);
+},
+decrement: function() {
+	update(-1);
+},
+decrementBy: function(val) {
+	update(val);
+},
+value: function() {
+	return privatePoints;
+},
+};
+})();
+console.log(points.value());
+points.incrementBy(3);
+console.log(points.value());
 ```
 
 2. prototypal inheritance
