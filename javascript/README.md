@@ -13,35 +13,35 @@ const holder = holdonto('samo')
 holder();
 ```
 
--   Simulates private functions in javascript.
+-   Closures can simulate private functions in javascript. In the following, the update method is not accessible outside of the pointSystem function. Instead the 3 public methods are made available which in turn utilize the update method.
 
 ```
-var points = (function() {
-var privatePoints = 0;
-function update(val) {
-privatePoints += val;
-}
-return {
-increment: function() {
-	update(1);
-},
-incrementBy: function(val) {
-	update(val);
-},
-decrement: function() {
-	update(-1);
-},
-decrementBy: function(val) {
-	update(val);
-},
-value: function() {
-	return privatePoints;
-},
-};
+var pointSystem = (function() {
+    var privatePoints = 0;
+    function update(val) {
+        privatePoints += val;
+    }
+    return {
+        increment: function() {
+            update(1);
+        },
+        incrementBy: function(val) {
+            update(val);
+        },
+        decrement: function() {
+            update(-1);
+        },
+        decrementBy: function(val) {
+            update(val);
+        },
+        value: function() {
+            return privatePoints;
+        },
+    };
 })();
-console.log(points.value());
-points.incrementBy(3);
-console.log(points.value());
+console.log(pointSystem.value());
+pointSystem.incrementBy(3);
+console.log(pointSystem.value());
 ```
 
 2. prototypal inheritance
