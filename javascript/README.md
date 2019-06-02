@@ -1,6 +1,18 @@
 ## 2 Pillars of Javascript
 
-1. closure
+1. closure - inner functions have access to outter functions variables
+
+```
+function holdonto(me){
+    let ransom = 'ransomed: ' + me;
+    return function(){
+        console.log(ransom)
+    }
+}
+const holder = holdonto('samo')
+holder();
+```
+
 2. prototypal inheritance
 
 ## OOP
@@ -70,6 +82,7 @@ const c = getCount();
 ```
 
 9. Currying (Haskell Brooks Curry - mathematician) - "transform a function with multiple arguments into a chain of single-argument functions instead"
+   "Currying is a way of constructing functions that allows partial application of a function’s arguments."
 
 ```
 const mul = (a,b) => a*b;
@@ -85,6 +98,8 @@ curriedBy3(8);
 const mul = (a,b,c) => a*b*c;
 const partialMultiplyBy3 = mul.bind(null, 3);
 partialMultiplyBy3(8,2);
+const partialMultiplyBy3And2 = mul.bind(null, 3, 2)
+partialMultiplyBy3(8);
 ```
 
 11. Memoization = Caching. Below is technique used in Dynamic programming alot.
@@ -122,6 +137,23 @@ console.log(executioner(30));
 13. Arity - Number of arguments a function takes. The fewer the better.
 
 ### Why be functional?
+
+-   Many operations on fixed data
+-   stateless
+-   pure functions with no side effects
+-   we can run code in parallel on seperate processors
+-   More declarative (what we want done)
+-   good for processing big data, can run on muliple processors
+-   data and behavior are kept separate
+
+### Why Be Down with OOP?
+
+-   Few operation on commn data
+-   stateful - modifying state
+-   side effects are happening, things are getting done
+-   Imperative ( How we will do things)
+-   good for when you have a lot going. Modeling objects can simplify logic
+-   data and behavior bundle into an object
 
 ### References:
 
