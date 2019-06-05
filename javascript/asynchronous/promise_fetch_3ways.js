@@ -16,7 +16,7 @@ Promise.all(
 		console.log(results[2]);
 	})
 	.catch(err => console.log('Error: ', err))
-	.finally(() => console.log('finally data: '));
+	.finally(() => console.log('finally'));
 
 //Same thing using Async Await
 const getData = async function() {
@@ -32,6 +32,8 @@ const getData = async function() {
 		console.log('finito');
 	} catch (err) {
 		console.log('Error: ', err);
+	} finally {
+		console.log('Once and for all');
 	}
 };
 //getData();
