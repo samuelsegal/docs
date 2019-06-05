@@ -16,7 +16,7 @@ Promise.all(
 		console.log(results[2]);
 	})
 	.catch(err => console.log('Error: ', err))
-	.finally(() => console.log('finally Done'));
+	.finally(() => console.log('finally data: '));
 
 //Same thing using Async Await
 const getData = async function() {
@@ -34,7 +34,7 @@ const getData = async function() {
 		console.log('Error: ', err);
 	}
 };
-getData();
+//getData();
 
 //Same thingh usinf `for await of`
 const fetchPosts2 = async function() {

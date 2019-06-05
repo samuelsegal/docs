@@ -1,6 +1,6 @@
 ## 2 Pillars of Javascript
 
-1. closure - a function that returns a function having access to variables in its lexical environment. "A useful way to provide instance data to a callback."  
+1. closure - a function that returns a function having access to variables in its lexical environment. "A useful way to provide instance data to a callback."
 
 ```
 function holdonto(me){
@@ -52,6 +52,20 @@ console.log(pointSystem.value());
 2. Abstraction
 3. Inheritance
 4. Polymorphyism
+
+### Modules
+
+Solutions for providing a way to modularize code safely listed in historical sequesnce.
+
+-   IIFE - First there were IIFE's - Immediately Invoked Function Expression. Like JQuery`
+-   CommonJS - THen came CommonJS. Modules loaded synchronously
+    -   Browserify came along as a tool to bundle dependencies
+-   AMD (Asynchronouse Module Definition) \_ Load modules asynchronously
+-   ES6 Modules
+
+*   In node we can use the --experimental-modules flag i.e. `node --experimental-modules server.mjs`
+*   We can also use babel-register and babel-preset-env.
+*   in html pages for browser runtime, we use `<script src="module"></script>` with a server
 
 ## Functional Programming
 
