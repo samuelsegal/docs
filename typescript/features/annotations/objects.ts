@@ -9,7 +9,7 @@ const profile = {
 		this.age = age;
 	},
 };
-//Note: ignore the waerning about name, I believe this is due to another variable named name that is perhaps global, if we renamed to namer or mano, thered be no warning
+//Note: ignore the waerning about name, I believe this is due to another variable named name that is perhaps global (such as name declared in lib.dom.d.ts), if we renamed to namer or mano, thered be no warning
 let { age, name }: { age: number; name: string } = profile;
 age = 3;
 console.log(profile);
