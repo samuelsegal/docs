@@ -47,7 +47,7 @@ for (let i = 0; i < words.length; i++) {
 }
 //3) When we have a variable whose type cannot be inferred correctly
 let numbers = [-10, -1, 12];
-let numbAbove0: boolean | number = false;
+let numbAbove0: boolean | numbermn = false;
 for (let i = 0; i < numbers.length; i++) {
 	if (numbers[i] > 0) {
 		numbAbove0 = numbers[i];
