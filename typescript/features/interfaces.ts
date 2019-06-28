@@ -39,3 +39,4 @@ const printSummary = (item: Reportable) => {
 printVehicleUsingIntercae(oldCivic);
 printSummary(oldCivic);
 printSummary(hotDrink);
+
