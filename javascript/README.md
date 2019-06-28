@@ -1,4 +1,4 @@
-## 2 Pillars of Javascript
+## Closures / Prototypal Inheritence  
 
 1. closure - a function that returns a function having access to variables in its lexical environment. "A useful way to provide instance data to a callback."
 
