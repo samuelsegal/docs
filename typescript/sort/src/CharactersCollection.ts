@@ -2,11 +2,6 @@ import { Sorter, Sortable } from './Sorter';
 
 export class CharactersCollection extends Sorter implements Sortable {
 	compare(leftIndex: number, rightIndex: number): boolean {
-		console.log(leftIndex);
-		console.log(rightIndex);
-		console.log(this.data);
-		console.log(this.data[leftIndex]);
-		console.log(this.data[rightIndex]);
 		return this.data[leftIndex].toLowerCase() > this.data[rightIndex].toLowerCase();
 	}
 	swap(leftIndex: number, rightIndex: number): void {
