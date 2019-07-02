@@ -1,2 +1,11 @@
 "use strict";
-console.log('hoodally hoodally');
+Object.defineProperty(exports, "__esModule", { value: true });
+var NumbersCollection_1 = require("./NumbersCollection");
+var Sorter_1 = require("./Sorter");
+var CharactersCollection_1 = require("./CharactersCollection");
+var nums = new NumbersCollection_1.NumbersCollection([12, -1]);
+var sorter = new Sorter_1.Sorter(nums);
+var chars = new CharactersCollection_1.CharactersCollection('Xa');
+var charSorter = new Sorter_1.Sorter(chars);
+charSorter.sort();
+sorter.sort();
