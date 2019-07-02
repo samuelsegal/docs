@@ -17,6 +17,5 @@ export class Sorter {
 				}
 			}
 		}
-		console.log(`After sort:`, this.collection);
 	}
 }
