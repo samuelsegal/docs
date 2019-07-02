@@ -1,6 +1,6 @@
-import { Sortable } from './Sorter';
+import { Sorter, Sortable } from './Sorter';
 
-export class CharactersCollection implements Sortable {
+export class CharactersCollection extends Sorter implements Sortable {
 	compare(leftIndex: number, rightIndex: number): boolean {
 		console.log(leftIndex);
 		console.log(rightIndex);
@@ -16,7 +16,9 @@ export class CharactersCollection implements Sortable {
 		chars[rightIndex] = tmp;
 		this.data = chars.join('');
 	}
-	constructor(public data: string) {}
+	constructor(public data: string) {
+		super();
+	}
 	get length(): number {
 		return this.data.length;
 	}

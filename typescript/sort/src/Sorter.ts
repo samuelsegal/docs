@@ -3,17 +3,17 @@ export interface Sortable {
 	compare(leftIndex: number, rightIndex: number): boolean;
 	swap(leftIndex: number, rightIndex: number): void;
 }
-export class Sorter {
-	constructor(public collection: Sortable) {
-		this.collection = collection;
-	}
+export abstract class Sorter {
+	abstract compare(leftIndex: number, rightIndex: number): boolean;
+	abstract swap(leftIndex: number, rightIndex: number): void;
+	abstract length: number;
 	//bubble sort
 	sort(): void {
-		const { length } = this.collection;
+		const { length } = this;
 		for (let i = 0; i < length; i++) {
 			for (let z = 0; z < length - i - 1; z++) {
-				if (this.collection.compare(z, z + 1)) {
-					this.collection.swap(z, z + 1);
+				if (this.compare(z, z + 1)) {
+					this.swap(z, z + 1);
 				}
 			}
 		}

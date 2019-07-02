@@ -1,10 +1,10 @@
-import { Sortable } from './Sorter';
+import { Sortable, Sorter } from './Sorter';
 
 class LLNode {
 	next: LLNode | null = null;
 	constructor(public data: number) {}
 }
-export class LinkedList implements Sortable {
+export class LinkedList extends Sorter implements Sortable {
 	compare(leftIndex: number, rightIndex: number): boolean {
 		if (!this.head) {
 			throw new Error('List Empty in Linked List');
