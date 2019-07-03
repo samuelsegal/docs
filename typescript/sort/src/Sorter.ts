@@ -7,7 +7,7 @@ export interface Sortable {
 }
 
 //extending abstrat classes is good for when we want to build up a definition for an object
-//this strongly couples the classes together, as if theyh are in a group with similliar objectives
+//this strongly couples the classes together, as if they are in a group with similliar objectives
 /*
  * Extend this class. THen we can execute sort directly from class rather using wrapper.
  */
@@ -28,7 +28,7 @@ export abstract class Sorter {
 	}
 }
 /*
- * Use this class in coorelatiopn with Sortable Interface to wrap the Sortable class for sort() execution of said class
+ * Use this class in coorelation with Sortable Interface to wrap the Sortable class for sort() execution of said class
  */
 export class SorterWrapper {
 	constructor(public collection: Sortable) {

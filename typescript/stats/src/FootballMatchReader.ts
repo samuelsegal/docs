@@ -1,6 +1,6 @@
 import { dateStringToDate } from './utils';
 import { MatchResult } from './MatchResults';
-type FOOTBALL_ROW_TYPE = [Date, string, string, number, number, MatchResult, string];
+import { FOOTBALL_ROW_TYPE } from './MatchData';
 
 interface DataReader {
 	read(): void;
