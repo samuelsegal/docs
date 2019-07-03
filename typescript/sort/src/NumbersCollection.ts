@@ -1,5 +1,7 @@
 import { Sorter } from './Sorter';
-
+/*
+ * Demonstrates inheritence. This way we will need no wrapper as is needed for those that simply implement Sortable interface
+ */
 export class NumbersCollection extends Sorter {
 	constructor(public data: number[]) {
 		super();

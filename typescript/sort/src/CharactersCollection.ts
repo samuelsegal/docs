@@ -1,6 +1,9 @@
 import { Sorter, Sortable } from './Sorter';
 
-export class CharactersCollection extends Sorter implements Sortable {
+/*
+ * Demonstrates interface implementation
+ */
+export class CharactersCollection implements Sortable {
 	compare(leftIndex: number, rightIndex: number): boolean {
 		return this.data[leftIndex].toLowerCase() > this.data[rightIndex].toLowerCase();
 	}
@@ -12,7 +15,7 @@ export class CharactersCollection extends Sorter implements Sortable {
 		this.data = chars.join('');
 	}
 	constructor(public data: string) {
-		super();
+		//super();
 	}
 	get length(): number {
 		return this.data.length;
