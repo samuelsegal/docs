@@ -16,6 +16,10 @@ const csvFileReader = new CsvFileReader('football.csv');
 const matchReader = new FootballMatchReader(csvFileReader);
 matchReader.load();
 
+//Or using convenient static creteor fromCsv method we can do following
+
+const oneLineBuilderMatchReader = FootballMatchReader.fromCsv('football.csv');
+oneLineBuilderMatchReader.load();
 // Using Inhneritance style
 // const reader = new FootballMatchReader('football.csv');
 // reader.read();
@@ -38,5 +42,8 @@ matchReader.load();
 const summaryConsole = new Summary(new WinsAnalysis('Man United'), new ConsoleReport());
 summaryConsole.buildAndPrintReport(matchReader.matches);
 
-const summaryHtml = new Summary(new WinsAnalysis('Man United'), new HtmlReport());
+const summaryHtml = new Summary(new WinsAnalysis('Man United'), new HtmlReport('htmlReports/mansUnited.html'));
 summaryHtml.buildAndPrintReport(matchReader.matches);
+
+const winsHtmlSummary = Summary.winsAnalysisHtmlReport('West Ham', 'htmlReports/westHam.html');
+winsHtmlSummary.buildAndPrintReport(oneLineBuilderMatchReader.matches);

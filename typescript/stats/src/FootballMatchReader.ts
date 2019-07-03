@@ -1,12 +1,16 @@
 import { dateStringToDate } from './utils';
 import { MatchResult } from './MatchResults';
 import { FOOTBALL_ROW_TYPE } from './MatchData';
+import { CsvFileReader } from './CsvFileReader';
 
 interface DataReader {
 	read(): void;
 	data: string[][];
 }
 export class FootballMatchReader {
+	static fromCsv(fileName: string): FootballMatchReader {
+		return new FootballMatchReader(new CsvFileReader(fileName));
+	}
 	matches: FOOTBALL_ROW_TYPE[] = [];
 	constructor(public reader: DataReader) {}
 	load(): void {
