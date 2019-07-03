@@ -6,6 +6,7 @@ import { CsvFileReader } from './CsvFileReader';
 import { Summary } from './Summary';
 import { WinsAnalysis } from './analyzers/WinsAnalysis';
 import { ConsoleReport } from './reportTargets/ConsoleReport';
+import { HtmlReport } from './reportTargets/HtmlReport';
 
 //Using Composition style
 //Create an implementation of the DataReader interface from MatchReader
@@ -30,5 +31,12 @@ matchReader.load();
 // 	}
 // }
 
-const summary = new Summary(new WinsAnalysis('Man United'), new ConsoleReport());
-summary.buildAndPrintReport(matchReader.matches);
+/*
+ * To demostrate composition we have a Summary class. It accepts an Analyzer and OuputTarget
+ * Below we create 2 Summaries, One is a simply logs report to console, the other saves it to an html file
+ */
+const summaryConsole = new Summary(new WinsAnalysis('Man United'), new ConsoleReport());
+summaryConsole.buildAndPrintReport(matchReader.matches);
+
+const summaryHtml = new Summary(new WinsAnalysis('Man United'), new HtmlReport());
+summaryHtml.buildAndPrintReport(matchReader.matches);
