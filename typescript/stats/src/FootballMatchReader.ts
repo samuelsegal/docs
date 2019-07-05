@@ -8,6 +8,7 @@ interface DataReader {
 	data: string[][];
 }
 export class FootballMatchReader {
+	//convenient builder method for cvs files
 	static fromCsv(fileName: string): FootballMatchReader {
 		return new FootballMatchReader(new CsvFileReader(fileName));
 	}
