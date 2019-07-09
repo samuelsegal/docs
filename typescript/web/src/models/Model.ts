@@ -34,6 +34,7 @@ export class Model<T extends HasId> {
 			throw new Error('There is no id associated with this user. Cannot fetch');
 		}
 		this.sync.fetch(id).then((response: AxiosResponse) => {
+			console.log(`response: `, response.data);
 			this.set(response.data);
 		});
 	}
