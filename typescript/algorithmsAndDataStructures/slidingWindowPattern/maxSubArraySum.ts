@@ -8,7 +8,7 @@
 (function() {
 	/**
 	 * Solution that is not as optimal as could be.
-	 * O( n * n) =  Do they call this linear squared time?
+	 * O( n * n) =  Do they call this Quadratic time?
 	 * @param nums
 	 * @param num
 	 */
