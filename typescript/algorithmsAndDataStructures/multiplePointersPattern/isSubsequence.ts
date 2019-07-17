@@ -2,7 +2,7 @@
 	/**
 	 * Write a function called isSubsequence which takes in two strings and
 	 * checks whether the characters in the first string appear somewhere
-	 * in the second string without their orer changing
+	 * in the second string without their order changing
 	 * Complexities:
 	 * Time: O(n+m)
 	 * Space: O(1)

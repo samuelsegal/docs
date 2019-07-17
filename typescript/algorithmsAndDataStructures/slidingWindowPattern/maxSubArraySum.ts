@@ -34,6 +34,9 @@
 	const maxSubArraySumOptimal = (nums: number[], num: number): number => {
 		let tmpSum = 0;
 		let maxSum = 0;
+		if (nums === undefined || nums.length === 0 || nums.length < num) {
+			return null;
+		}
 		//only iterativel accumulate 1 time
 		for (let i = 0; i < num; i++) {
 			maxSum += nums[i];
@@ -57,4 +60,5 @@
 	console.log(maxSubArraySumOptimal([1, 2, 5, 2, 8, 1, 5], 2));
 	console.log(maxSubArraySumOptimal([1, 2, 3, 4, 5, 6, 7, 8, 9], 3));
 	console.log(maxSubArraySumOptimal([-2, -1, -8, -9], 2));
+	console.log(maxSubArraySumOptimal([], 2));
 })();
