@@ -6,7 +6,7 @@ import { LinkedList } from './LinkedList';
 //For demonstration we will use the different techiques
 
 //Firs useet the version that inherits Sorter
-const nums = new NumbersCollection([12, -1]);
+const nums = new NumbersCollection([12, -1, 2, 33, 4, 56, 7]);
 nums.sort();
 console.log('numbre sorter:', nums);
 
@@ -23,6 +23,7 @@ ll.add(100);
 ll.add(100);
 ll.add(100);
 ll.add(100);
+ll.add(8);
 ll.add(8);
 //using extended sort function
 ll.sort();

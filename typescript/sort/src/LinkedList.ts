@@ -5,7 +5,8 @@ class LLNode {
 	constructor(public data: number) {}
 }
 /*
- *For demonstration purposes this class both extends Sorter giving it direct acces to sort function and implements so it can be used with SorterWrapper.
+ *For demonstration purposes this class both extends Sorter giving it direct
+ * acces to sort function and implements so it can be used with SorterWrapper.
  */
 export class LinkedList extends Sorter implements Sortable {
 	compare(leftIndex: number, rightIndex: number): boolean {
