@@ -1,9 +1,11 @@
 /**
  * Fibonacci - Sequence of whole numbers starting at 1,1 and is followed by the
  * addition of 2 previous numbers. 1,1,2,3,5,8,13.
- * Write a function called fib which accepts a number and returns the nth number in Fibonacci sequence
+ * Write a function called fib which accepts a number and returns the nth
+ * number in Fibonacci sequence.
  * fib(4) // 3
  * fib(10) //55
+ * Time Complexity: O(n)
  */
 (function() {
 	/**
@@ -16,8 +18,11 @@
 		}
 		let counter = 1;
 		let fibs = [1];
+		let thumbsUp = '👍';
+		const thumbArr = [];
 		const helper = (seq: number): number => {
-			console.log(`seq: ${seq}`);
+			thumbArr.push(thumbsUp);
+			console.log(`seq: ${seq} ${thumbArr.join()}`);
 			fibs[counter] = seq;
 			if (++counter === num) {
 				return seq;
@@ -28,12 +33,21 @@
 	};
 	console.log(fib(10));
 	/**
-	 * Less code - pure recursion, I believe is actually worse on performance.
+	 * Less code - pure recursion, much worse on performance.
+	 * None the less, a good to demonstrate excursion. Displays the insanity
+	 * findining sanity when ther is nothing else to find.
+	 * Time complexity:  O(n2*) + n - 2
 	 * @param n
 	 */
+	let c = 0;
+	let face = '🤔';
+	const faceArr = [];
 	function fibPureRecursive(n: number): number {
-		console.log(`n: ${n}`);
-		if (n <= 2) return 1;
+		faceArr.push(face);
+		console.log(`${c++} ${faceArr.join('')}`);
+		if (n <= 2) {
+			return 1;
+		}
 		return fibPureRecursive(n - 1) + fibPureRecursive(n - 2);
 	}
 	console.log(fibPureRecursive(10));

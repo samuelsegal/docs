@@ -18,11 +18,16 @@ export abstract class Sorter {
 	//bubble sort
 	sort(): void {
 		const { length } = this;
-		for (let i = length; i >= 0; i--) {
+		for (let i = length; i > 0; i--) {
+			let noSwap = true;
 			for (let j = 0; j < i - 1; j++) {
 				if (this.compare(j, j + 1)) {
+					noSwap = false;
 					this.swap(j, j + 1);
 				}
+			}
+			if (noSwap) {
+				break;
 			}
 		}
 	}
@@ -37,11 +42,16 @@ export class SorterWrapper {
 	//bubble sort
 	sort(): void {
 		const { length } = this.collection;
-		for (let i = 0; i < length; i++) {
-			for (let z = 0; z < length - i - 1; z++) {
-				if (this.collection.compare(z, z + 1)) {
-					this.collection.swap(z, z + 1);
+		for (let i = length; i > 0; i--) {
+			let noSwap = true;
+			for (let j = 0; j < i - 1; j++) {
+				if (this.collection.compare(j, j + 1)) {
+					noSwap = false;
+					this.collection.swap(j, j + 1);
 				}
+			}
+			if (noSwap) {
+				break;
 			}
 		}
 	}
