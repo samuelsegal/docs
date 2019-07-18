@@ -3,7 +3,8 @@ import { swapES2015 } from './swap';
 
 /**
  * Selection Sort. Loops through and pushes the winner of comparison to bottom.
- * Time Complexity O(n)
+ * Time Complexity : O(n * n)
+ * Space: O(1)
  */
 export class SelectionSort {
 	static face = '🤓';
