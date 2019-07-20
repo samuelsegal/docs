@@ -8,6 +8,7 @@ import { Sort } from './Sort';
  *     Worst case: O(n * n)
  *     Avg. case: O(n * n)
  *     Best Case: O(n)
+ *   Space: O(1)
  */
 export interface BubbleSort extends Sort {}
 export class BubbleSort implements BubbleSort {
@@ -19,11 +20,10 @@ export class BubbleSort implements BubbleSort {
 		const compare = direction === Direction.ASC ? Comparator.lessThen : Comparator.gtrThen;
 		for (let i = this.arr.length; i > 0; i--) {
 			let noSwaps = true;
-			const innerLoop = [];
 			for (let j = 0; j < i - 1; j++) {
-				if (this.arr[j] > this.arr[j + 1]) {
+				if (compare(this.arr[j + 1], this.arr[j])) {
 					noSwaps = false;
-					swapES2015(this.arr, j, j + 1);
+					swapES2015(this.arr, j + 1, j);
 				}
 			}
 			if (noSwaps) {

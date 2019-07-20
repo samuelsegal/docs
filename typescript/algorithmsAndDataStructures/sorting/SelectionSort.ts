@@ -1,44 +1,42 @@
 import { fork } from 'child_process';
 import { swapES2015 } from './swap';
+import { Sort } from './Sort';
+import { Direction, Comparator } from './Direction';
 
 /**
  * Selection Sort. Loops through and pushes the winner of comparison to bottom.
  * Time Complexity : O(n * n)
  * Space: O(1)
  */
-export class SelectionSort {
-	static face = '🤓';
-	static mean = '⏩⏪';
-	static sortOptimal = (arr: any[]): any[] => {
-		for (let i = 0; i < arr.length; i++) {
+export class SelectionSort implements Sort {
+	sort = (direction: Direction): void => {
+		this.sortOptimal(direction);
+	};
+	constructor(public arr: any[]) {}
+	sortOptimal = (direction: Direction): any[] => {
+		const compare = direction === Direction.ASC ? Comparator.lessThen : Comparator.gtrThen;
+		for (let i = 0; i < this.arr.length; i++) {
 			let min = i;
-			const faceArr = [];
-			const meanArr = [];
-			for (let j = i; j < arr.length; j++) {
-				faceArr.push(SelectionSort.face);
-				if (arr[j] < arr[min] && j !== min) {
+			for (let j = i; j < this.arr.length; j++) {
+				if (compare(this.arr[j], this.arr[min]) && j !== min) {
 					min = j;
 				}
 			}
 			if (min !== i) {
-				meanArr.push(SelectionSort.mean);
-				swapES2015(arr, i, min);
+				swapES2015(this.arr, i, min);
 			}
-			console.log(faceArr.join(''), meanArr);
 		}
-		return arr;
+		return this.arr;
 	};
-	static sortNonOptimal = (arr: any[]): any[] => {
+	sortNonOptimal = (arr: any[]): any[] => {
 		for (let i = 0; i < arr.length; i++) {
 			let min = i;
 			const faceArr = [];
 			const meanArr = [];
 			for (let j = i; j < arr.length; j++) {
-				faceArr.push(SelectionSort.face);
 				if (arr[j] < arr[min]) {
 					//This is not necesssary as we only
 					//1 swap per sweep is needed like in sortOptimal
-					meanArr.push(SelectionSort.mean);
 					swapES2015(arr, i, j);
 				}
 			}
@@ -46,26 +44,17 @@ export class SelectionSort {
 		}
 		return arr;
 	};
-	static sortSuperNaive = (arr: any[]): any[] => {
+	sortSuperNaive = (arr: any[]): any[] => {
 		for (let i = 0; i < arr.length; i++) {
 			let min = i;
-			const faceArr = [];
-			const meanArr = [];
 			for (let j = 0; j < arr.length; j++) {
-				faceArr.push(SelectionSort.face);
 				if (arr[j] < arr[min]) {
 					//This is not necesssary as we only
 					//1 swap per sweep is needed like in sortOptimal
-					meanArr.push(SelectionSort.mean);
 					swapES2015(arr, i, j);
 				}
 			}
-			console.log(faceArr.join(''), meanArr);
 		}
 		return arr;
 	};
 }
-
-console.log(SelectionSort.sortSuperNaive([0, 2, 3, 23, 55, 1, 44, 92, 36, -22, 38, 102, 2100, -40]));
-console.log(SelectionSort.sortNonOptimal([0, 2, 3, 23, 55, 1, 44, 92, 36, -22, 38, 102, 2100, -40]));
-console.log(SelectionSort.sortOptimal([0, 2, 3, 23, 55, 1, 44, 92, 36, -22, 38, 102, 2100, -40]));

@@ -9,6 +9,7 @@ import { Sort } from './Sort';
  *   Worst case : Quadratic : O(n * n)
  *   Avg.  case : O(n * n)
  *   Best case  : O(n)
+ * Space: O(1)
  *
  */
 
@@ -17,12 +18,12 @@ export class InsertionSort implements Sort {
 	sort = (direction: Direction): void => {
 		const compare = direction === Direction.ASC ? Comparator.lessThen : Comparator.gtrThen;
 		for (let i = 1; i < this.arr.length; i++) {
-			if (compare(this.arr[i - 1], this.arr[i])) {
+			if (compare(this.arr[i], this.arr[i - 1])) {
 				//Notice the condition in this for loop
 				//No need to go all the way back as once one lesser
 				//is found all before are already sorted
-				for (let j = i; j >= 0 && compare(this.arr[j - 1], this.arr[j]); j--) {
-					swapES2015(this.arr, j - 1, j);
+				for (let j = i; j >= 0 && compare(this.arr[j], this.arr[j - 1]); j--) {
+					swapES2015(this.arr, j, j - 1);
 				}
 			}
 		}

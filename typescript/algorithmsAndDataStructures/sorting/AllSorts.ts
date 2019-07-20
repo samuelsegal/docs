@@ -14,4 +14,12 @@ export class AllSorts {
 		});
 		return ret;
 	};
+	printAll = () => {
+		this.sortsArr.forEach(sorter => {
+			console.log(sorter.constructor.name);
+			sorter.arr.forEach(data => {
+				console.log(data);
+			});
+		});
+	};
 }
