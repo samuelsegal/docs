@@ -1,4 +1,4 @@
-import { bubbleSortData, mergeSortData, selectionSortData, insertionSortData } from './Util';
+import { bubbleSortData, mergeSortData, selectionSortData, insertionSortData, quickSortData } from './Util';
 import { Direction } from './Direction';
 import { InsertionSort } from './InsertionSort';
 import { BubbleSort } from './BubbleSort';
@@ -6,6 +6,7 @@ import { performance } from 'perf_hooks';
 import { AllSorts } from './AllSorts';
 import { MergeSort } from './MergeSort';
 import { SelectionSort } from './SelectionSort';
+import { QuickSort } from './QuickSort';
 
 const allSorts = new AllSorts();
 
@@ -41,6 +42,12 @@ mergeSort.sort(Direction.ASC);
 time2 = performance.now();
 const mergeTime = (time2 - time1) / 1000;
 
+time1 = performance.now();
+const quickSort = new QuickSort(quickSortData);
+quickSort.sort(Direction.ASC);
+time2 = performance.now();
+const quickTime = (time2 - time1) / 1000;
+
 allSorts.push(insertSort);
 allSorts.push(bubbleSort);
 allSorts.push(mergeSort);
@@ -51,3 +58,4 @@ console.log(`Insertion Sort time elapsed: ${insertTime} seconds`);
 console.log(`Bubble Sort time elapsed: ${bubbleTime} seconds`);
 console.log(`Selection Sort time elapsed: ${selectionTime} seconds`);
 console.log(`Merge Sort time elapsed: ${mergeTime} seconds`);
+console.log(`Quick Sort time elapsed: ${quickTime} seconds`);
