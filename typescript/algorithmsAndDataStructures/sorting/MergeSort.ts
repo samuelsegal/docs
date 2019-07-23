@@ -1,5 +1,6 @@
 import { Direction, Comparator } from './Direction';
 import { Sort } from './Sort';
+import { mergeSortData } from './Util';
 /**
  * MergeSort:
  *  - Combination of merging and sorting.
@@ -14,10 +15,10 @@ import { Sort } from './Sort';
  *   Space: O(n)
  */
 export class MergeSort implements Sort {
-	private direction: Direction;
+	compare: Function;
 	constructor(public arr: any[]) {}
 	sort = (direction: Direction): void => {
-		this.direction = direction;
+		this.compare = direction === Direction.ASC ? Comparator.lessThen : Comparator.gtrThen;
 		this.arr = this.split(this.arr);
 	};
 	split = (arrayToSplit: any[]): any[] => {
@@ -36,10 +37,9 @@ export class MergeSort implements Sort {
 	 */
 	public counter: number = 0;
 	mergeSort = (arr1: any[], arr2: any[]): any[] => {
-		const compare = this.direction === Direction.ASC ? Comparator.lessThen : Comparator.gtrThen;
 		const ret = [];
 		for (let i1 = 0, i2 = 0; i1 < arr1.length || i2 < arr2.length; ) {
-			if (compare(arr1[i1], arr2[i2]) || arr2[i2] === undefined) {
+			if (this.compare(arr1[i1], arr2[i2]) || arr2[i2] === undefined) {
 				ret.push(arr1[i1++]);
 			} else {
 				ret.push(arr2[i2++]);
