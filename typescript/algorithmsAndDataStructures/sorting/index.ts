@@ -1,4 +1,11 @@
-import { bubbleSortData, mergeSortData, selectionSortData, insertionSortData, quickSortData } from './Util';
+import {
+	bubbleSortData,
+	mergeSortData,
+	selectionSortData,
+	insertionSortData,
+	quickSortData,
+	radixSortData,
+} from './Util';
 import { Direction } from './Direction';
 import { InsertionSort } from './InsertionSort';
 import { BubbleSort } from './BubbleSort';
@@ -7,6 +14,7 @@ import { AllSorts } from './AllSorts';
 import { MergeSort } from './MergeSort';
 import { SelectionSort } from './SelectionSort';
 import { QuickSort } from './QuickSort';
+import { RadixSort } from './RadixSort';
 
 const allSorts = new AllSorts();
 
@@ -48,10 +56,17 @@ quickSort.sort(Direction.ASC);
 time2 = performance.now();
 const quickTime = (time2 - time1) / 1000;
 
+time1 = performance.now();
+const radixSort = new RadixSort(radixSortData);
+radixSort.sort(Direction.ASC);
+time2 = performance.now();
+const radixTime = (time2 - time1) / 1000;
+
 allSorts.push(insertSort);
 allSorts.push(bubbleSort);
 allSorts.push(mergeSort);
 allSorts.push(selectionSort);
+allSorts.push(quickSort);
 //console.log(allSorts.printAll());
 console.log(mergeSort.counter);
 console.log(`Insertion Sort time elapsed: ${insertTime} seconds`);
@@ -59,3 +74,4 @@ console.log(`Bubble Sort time elapsed: ${bubbleTime} seconds`);
 console.log(`Selection Sort time elapsed: ${selectionTime} seconds`);
 console.log(`Merge Sort time elapsed: ${mergeTime} seconds`);
 console.log(`Quick Sort time elapsed: ${quickTime} seconds`);
+console.log(`Radix Sort time elapsed: ${radixTime} seconds`);
