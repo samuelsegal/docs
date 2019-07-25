@@ -1,8 +1,7 @@
 /**
- * SinglyLinkedList - Good for insertion and deletion O(1) -> O(n). Bad for random access
- * as it hasx no random acccess O(n)
+ * Doubly Linked List
  */
-export class SinglyLinkedList {
+export class DoublyLinkedList {
 	head: Node;
 	tail: Node;
 	length: number;
@@ -12,96 +11,97 @@ export class SinglyLinkedList {
 		this.length = 0;
 	}
 	/**
-	 * push - adds a node with given val to the end of list.
-	 * @param val - value for new node
+	 * push - adds new node to end of list
 	 */
-	push(val: any): SinglyLinkedList {
+	push = (val: any) => {
 		const node = new Node(val);
-		if (this.head === null) {
+		if (!this.head) {
 			this.head = node;
 			this.tail = node;
 		} else {
 			this.tail.next = node;
+			node.prev = this.tail;
 			this.tail = node;
 		}
 		this.length++;
 		return this;
-	}
+	};
 	/**
-	 * pop = removes last node, by singly linked lists` nature this is bad for
-	 * performance.
+	 * pop
 	 */
-	pop = (): Node => {
+	pop = () => {
 		if (!this.head) {
 			return undefined;
 		}
-		let current = this.head;
-		let newTail = current;
-		while (current.next) {
-			newTail = current;
-			current = current.next;
-		}
-		this.tail = newTail;
-		this.tail.next = null;
-		this.length--;
-		if (this.length === 0) {
+		let toBeRemoved = this.tail;
+		if (this.length === 1) {
 			this.head = null;
 			this.tail = null;
+		} else {
+			this.tail = this.tail.prev;
+			this.tail.next = null;
 		}
-		return current;
+		this.length--;
+		return toBeRemoved;
 	};
 	/**
-	 * shift - removes head node assigning next node to head node
+	 * shift - removes head Node assiging the next to head. By nature all
+	 * other nodes shift left 1.
 	 */
 	shift = (): Node => {
-		if (!this.head) {
+		if (this.length === 0) {
 			return undefined;
 		}
-		let headToRemove = this.head;
-		this.head = headToRemove.next;
-		this.length--;
-		if (this.length === 0) {
+		const oldHead = this.head;
+		if (this.length === 1) {
+			this.head = null;
 			this.tail = null;
+		} else {
+			this.head = oldHead.next;
+			this.head.prev = null;
 		}
-		return headToRemove;
+
+		this.length--;
+		return oldHead;
 	};
 	/**
-	 * unshift - adds new node to beginning of list. good for performance
-	 * @param val - value for new node
+	 * unshift - adds new node to begining
 	 */
-	unshift = (val: any): SinglyLinkedList => {
-		const node = new Node(val);
-		if (!this.head) {
-			this.tail = node;
-			this.head = node;
+	unshift = (val: any): DoublyLinkedList => {
+		if (this.length === 0) {
+			this.push(val);
 		} else {
+			const node = new Node(val);
+			this.head.prev = node;
 			node.next = this.head;
 			this.head = node;
+			this.length++;
 		}
-		this.length++;
 		return this;
 	};
-	/**
-	 * get - retieves node at given index, 0 Based.
-	 * @param index
-	 */
 	get = (index: number): Node => {
-		let node = this.head;
-		let count = 0;
 		if (index < 0 || index >= this.length) {
 			return null;
 		}
-		while (count !== index) {
-			node = node.next;
-			count++;
+		const halfSize = Math.floor(this.length / 2);
+		let node: Node;
+		if (index < halfSize) {
+			node = this.head;
+			let count = 0;
+			while (count !== index) {
+				node = node.next;
+				count++;
+			}
+		} else {
+			node = this.tail;
+			let count = this.length - 1;
+			while (count !== index) {
+				node = node.prev;
+				count--;
+			}
 		}
 		return node;
 	};
-	/**
-	 * set - updates the node at given index and returns true. If there is no
-	 * node previous node @ given index and index !== length + 1, no node is
-	 * set and false is returned
-	 */
 	set = (index: number, val: any): boolean => {
 		let foundNode = this.get(index);
 		if (foundNode) {
@@ -134,6 +134,8 @@ export class SinglyLinkedList {
 		let prev = this.get(index - 1);
 		let tmp = prev.next;
 		prev.next = node;
+		node.prev = prev;
+		tmp.prev = node;
 		node.next = tmp;
 		this.length++;
 		return true;
@@ -153,25 +155,12 @@ export class SinglyLinkedList {
 			let prev = this.get(index - 1);
 			let removedNode = this.get(index);
 			prev.next = removedNode.next;
+			prev.next.prev = prev;
 			this.length--;
+			removedNode.prev = null;
+			removedNode.next = null;
 			return removedNode;
 		}
-	};
-	/**
-	 * reverse - reverses the list
-	 */
-	reverse = (): SinglyLinkedList => {
-		let node = this.head;
-		this.head = this.tail;
-		this.tail = node;
-		let prev = null;
-		for (let i = 0; i < this.length; i++) {
-			let next = node.next;
-			node.next = prev;
-			prev = node;
-			node = next;
-		}
-		return this;
 	};
 	/**
 	 * traverse - accepts a function to be executed for each node from
@@ -199,14 +188,12 @@ export class SinglyLinkedList {
 		}, []);
 	};
 }
+
 /**
- * Node for Singly Linked List
+ * Node for Doubly Linked List
  */
 export class Node {
 	next: Node;
-	constructor(public val: any, next?: Node) {
-		if (next) {
-			this.next = next;
-		}
-	}
+	prev: Node;
+	constructor(public val: any) {}
 }
