@@ -1,5 +1,6 @@
 import { DoublyLinkedList } from './DoublyLinkedList';
 import { SinglyLinkedList } from './SinglyLinkedList';
+import { Queue } from './Queue';
 let doubly = new DoublyLinkedList();
 doubly.push('howdy');
 doubly.push('partner');
@@ -24,6 +25,11 @@ doubly.print();
 console.log(doubly.remove(3));
 doubly.print();
 
+const q = new Queue();
+console.log(q.enqueue('first'));
+console.log(q.enqueue('sec'));
+console.log(q.enqueue('third'));
+console.log(q.dequeue());
 // const list = new SinglyLinkedList();
 
 // list.push('hi');

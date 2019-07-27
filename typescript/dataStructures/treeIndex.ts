@@ -1,0 +1,13 @@
+import { BinarySearchTree } from './BinarySearchTree';
+import { Number } from './util/Number';
+const tree = new BinarySearchTree();
+const num = new Number(50);
+tree.insert(num);
+tree.insert(new Number(52));
+tree.insert(new Number(23));
+tree.insert(new Number(24));
+console.log(tree.insert(new Number(26)));
+console.log(tree.insert(new Number(26)));
+console.log(tree.find(new Number(50)));
+console.log(tree.find(new Number(23)));
+console.log(tree.find(new Number(26)));

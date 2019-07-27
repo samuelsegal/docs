@@ -13,7 +13,7 @@ export class DoublyLinkedList {
 	/**
 	 * push - adds new node to end of list
 	 */
-	push = (val: any) => {
+	push = (val: any): DoublyLinkedList => {
 		const node = new Node(val);
 		if (!this.head) {
 			this.head = node;
@@ -27,7 +27,7 @@ export class DoublyLinkedList {
 		return this;
 	};
 	/**
-	 * pop
+	 * pop - O(n) - much better in performance than singly linked list.
 	 */
 	pop = () => {
 		if (!this.head) {
@@ -162,6 +162,7 @@ export class DoublyLinkedList {
 			return removedNode;
 		}
 	};
+
 	/**
 	 * traverse - accepts a function to be executed for each node from
 	 * beginning to end
