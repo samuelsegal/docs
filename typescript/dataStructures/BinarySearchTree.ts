@@ -1,5 +1,6 @@
 import { BinaryTreeNode } from './BinaryTreeNode';
-import { Comparable, Countable } from './util/Comparable';
+import { Comparable, Countable } from './util/Able';
+import { AbstractNumber } from './util/AbstractNumber';
 /**
  * Binary Search Tree -
  * All child nodes to left are less than there parent.
@@ -55,19 +56,81 @@ export class BinarySearchTree {
 				if (node.right) {
 					node = node.right;
 				} else {
-					node.right = new BinaryTreeNode(val);
 					return undefined;
 				}
 			} else if (val.lessThen(node.val)) {
 				if (node.left) {
 					node = node.left;
 				} else {
-					node.left = new BinaryTreeNode(val);
 					return undefined;
 				}
 			} else {
 				return node;
 			}
 		}
+	};
+	/**
+	 * breadtFirstTraverse - traverses tree horizontally. for each node the
+	 * given function is applied to that node and its result is pushed to an
+	 * array that is returned
+	 */
+	breadthFirstTraverse = (func: Function): any[] => {
+		let node = this.root;
+		const data = [];
+		const queue = [];
+		queue.push(node);
+		while (queue.length) {
+			node = queue.shift();
+			data.push(func(node.val));
+			if (node.left) {
+				queue.push(node.left);
+			}
+			if (node.right) {
+				queue.push(node.right);
+			}
+		}
+		return data;
+	};
+	depthFirstPreOrder = (): any[] => {
+		const vals = [];
+		const traverseHelper = (node: BinaryTreeNode<Comparable>) => {
+			vals.push((<AbstractNumber>node.val).num);
+			if (node.left) {
+				traverseHelper(node.left);
+			}
+			if (node.right) {
+				traverseHelper(node.right);
+			}
+		};
+		traverseHelper(this.root);
+		return vals;
+	};
+	depthFirstPostOrder = (): any[] => {
+		const vals = [];
+		const traverseHelper = (node: BinaryTreeNode<Comparable>) => {
+			if (node.left) {
+				traverseHelper(node.left);
+			}
+			if (node.right) {
+				traverseHelper(node.right);
+			}
+			vals.push((<AbstractNumber>node.val).num);
+		};
+		traverseHelper(this.root);
+		return vals;
+	};
+	depthFirstInOrder = (): any[] => {
+		const vals = [];
+		const traverseHelper = (node: BinaryTreeNode<Comparable>) => {
+			if (node.left) {
+				traverseHelper(node.left);
+			}
+			vals.push((<AbstractNumber>node.val).num);
+			if (node.right) {
+				traverseHelper(node.right);
+			}
+		};
+		traverseHelper(this.root);
+		return vals;
 	};
 }
