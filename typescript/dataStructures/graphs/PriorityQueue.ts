@@ -1,15 +1,15 @@
 import { MaxBinaryHeap } from '../MaxBinaryHeap';
 import { Edge } from './WeightedGraph';
 
-export class PriorityQueue {
+export class PriorityQueue<T> {
 	queue: MaxBinaryHeap = new MaxBinaryHeap([]);
 	constructor() {}
 	enqueue = (val: any, priority: number): void => {
 		const edge = new Edge(val, priority);
 		this.queue.insert(edge);
 	};
-	dequeue = (): any => {
-		return this.queue.extractMax();
+	dequeue = (): Edge => {
+		return <Edge>this.queue.extractMax();
 	};
 	isEmpty = (): boolean => {
 		return this.queue.isEmpty();

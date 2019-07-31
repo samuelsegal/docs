@@ -2,10 +2,10 @@ import { PriorityQueue } from './PriorityQueue';
 import { Comparable } from '../util/Able';
 export class Edge implements Comparable {
 	constructor(public node: string, public weight: number) {}
-	lessThen(val: any): boolean {
+	lessThen(val: Edge): boolean {
 		return this.weight > val.weight;
 	}
-	gtrThen(val: any): boolean {
+	gtrThen(val: Edge): boolean {
 		return this.weight < val.weight;
 	}
 }
