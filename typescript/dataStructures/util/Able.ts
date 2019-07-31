@@ -5,3 +5,9 @@ export interface Comparable {
 export interface Countable {
 	count: number;
 }
+export interface Valuable {
+	val: any;
+}
+export interface Numericable {
+	num: number;
+}
