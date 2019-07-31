@@ -21,7 +21,7 @@ import { Task } from './util/Task';
 export class MaxBinaryHeap {
 	constructor(public values: Comparable[]) {}
 	isEmpty = (): boolean => {
-		return this.values.length > 0;
+		return this.values.length < 0;
 	};
 	insert = (value: Comparable): MaxBinaryHeap => {
 		this.values.push(value);

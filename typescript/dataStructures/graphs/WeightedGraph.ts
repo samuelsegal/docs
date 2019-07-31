@@ -3,10 +3,10 @@ import { Comparable } from '../util/Able';
 export class Edge implements Comparable {
 	constructor(public node: string, public weight: number) {}
 	lessThen(val: any): boolean {
-		return this.weight < val.weight;
+		return this.weight > val.weight;
 	}
 	gtrThen(val: any): boolean {
-		return this.weight > val.weight;
+		return this.weight < val.weight;
 	}
 }
 export class WeightedGraph {
@@ -18,8 +18,10 @@ export class WeightedGraph {
 		}
 	};
 	addEdge = (vertex1: string, vertex2: string, weight: number) => {
-		this.adjacencyList[vertex1].push({ node: vertex2, weight });
-		this.adjacencyList[vertex2].push({ node: vertex1, weight });
+		const e1 = new Edge(vertex1, weight);
+		const e2 = new Edge(vertex2, weight);
+		this.adjacencyList[vertex1].push(e2);
+		this.adjacencyList[vertex2].push(e1);
 	};
 	/**
 	 * dijkstra - shortest path
@@ -43,9 +45,9 @@ export class WeightedGraph {
 		}
 
 		//as long as there is something to visit
-		//while (!nodes.isEmpty()) {
-		while (nodes.values.length) {
-			smallest = nodes.dequeue().val;
+		while (!nodes.isEmpty()) {
+			//while (nodes.values.length) {
+			smallest = nodes.dequeue().node;
 			//console.log(smallest);
 			if (smallest === finish) {
 				//WE R DONE, BUILD PATH TO RETURN
@@ -62,6 +64,7 @@ export class WeightedGraph {
 					console.log(`neighbor: ${neighbor}, nextNode:`, nextNode);
 
 					//calculate the new distance to neighboring node
+
 					const candidate = distances[smallest] + nextNode.weight;
 					const nextNeighbor = nextNode.node;
 					if (candidate < distances[nextNeighbor]) {
