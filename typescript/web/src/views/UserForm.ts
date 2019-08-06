@@ -1,45 +1,43 @@
-import { User } from '../models/User';
-export class UserForm {
-	constructor(public parent: Element, public model: User) {}
+import { User, UserProps } from '../models/User';
+import { View } from './View';
+export class UserForm extends View<User, UserProps> {
 	eventsMap(): { [key: string]: () => void } {
 		return {
-			'click:button': this.onButtonClick,
-			'mouseenter:h1': this.onHeaderHover,
+			'click:.set-age': this.onSetAgeClick,
+			'click:.set-name': this.onSetNameClick.bind(this),
+			'click:.set-model': this.onSaveClick,
 		};
 	}
-	onButtonClick(): void {
-		console.log('button clicked', this);
+	onSaveClick = (): void => {
+		this.model.save();
+	};
+	/**
+	 * onSetNameClick
+	 * normally onSetNameClick would be an arrow function to handle "this".
+	 * Instead for this function we bind this when we map it in eventsMap
+	 * simply for reference or demonstrative purpose
+	 */
+	onSetNameClick(): void {
+		//console.log(`${this.eventsMap}`);
+		const input = this.parent.querySelector('input');
+		if (input) {
+			const name = input.value;
+			this.model.set({ name });
+		}
 	}
-	//By purpose for demonstration I created onHeaderHover to be a property arrow function
-	//Notice the difference in the value of this
-	onHeaderHover: () => void = () => {
-		console.log('header hovered: ', this);
+	onSetAgeClick = (): void => {
+		//console.log(`${this.eventsMap} age clicked`);
+		this.model.setRandomAge();
 	};
 
 	template(): string {
 		return `
             <div>
-                <h1>User Form</h1>
-                <div>User Name: ${this.model.get('name')}</div>
-                <input/>
-                <button>Click Me!</button>
+                <input placeholder="${this.model.get('name')}"/>
+				<button class="set-name">Change Name</button>
+				<button class="set-age">Set random age</button>
+				<button class="set-model">Save</button>
             </div>
-
         `;
-	}
-	bindEvents(fragment: DocumentFragment): void {
-		const eventsMap = this.eventsMap();
-		for (let eventKey in eventsMap) {
-			const [eventName, selector] = eventKey.split(':');
-			fragment.querySelectorAll(selector).forEach(element => {
-				element.addEventListener(eventName, eventsMap[eventKey]);
-			});
-		}
-	}
-	render(): void {
-		const templateElement = document.createElement('template');
-		templateElement.innerHTML = this.template();
-		this.bindEvents(templateElement.content);
-		this.parent.append(templateElement.content);
 	}
 }
