@@ -1,6 +1,11 @@
 import { Model } from '../models/Model';
-
+/**
+ * Abstract View which is of type Model<K>
+ */
 export abstract class View<T extends Model<K>, K> {
+	/**
+	 * regions property. Used for templating or View Nesting
+	 */
 	regions: { [key: string]: Element } = {};
 	constructor(public parent: Element, public model: T) {
 		this.bindModel();
@@ -28,15 +33,30 @@ export abstract class View<T extends Model<K>, K> {
 			});
 		}
 	}
-	mapRegions(fragment: DocumentFragment) {}
+	mapRegions(fragment: DocumentFragment) {
+		const regionsMap = this.regionsMap();
+		for (let key in regionsMap) {
+			const selector = regionsMap[key];
+
+			const element = fragment.querySelector(selector);
+			if (element) {
+				this.regions[key] = element;
+			}
+		}
+	}
 	render(): void {
 		this.parent.innerHTML = '';
 		const templateElement = document.createElement('template');
 		templateElement.innerHTML = this.template();
 		this.bindEvents(templateElement.content);
 		this.mapRegions(templateElement.content);
+		this.onRender();
 		this.parent.append(templateElement.content);
 	}
+	/**
+	 * default method. Override this for view nesting
+	 */
+	onRender(): void {}
 
 	abstract template(): string;
 }
