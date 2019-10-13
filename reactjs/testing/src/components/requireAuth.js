@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 /**
- * This is a HOC. it is used to guard a component with authoization
+ * Authorization HOC. it is used to guard a component with authorization
  */
 export default ChildComponent => {
 	class ComposedComponent extends Component {
