@@ -34,4 +34,5 @@ store.dispatch(action);
 
 console.log(store.getState());
 ```
-
+Note: THe only wayh top update the stores state is through the dispatch of actions.  
+There is no way to update stopre via direct access.
