@@ -202,7 +202,7 @@ console.log(executioner(30));
 
 -   Many operations on fixed data
 -   stateless
--   pure functions with no side effects
+-   pure functions with no side effects - this makes functions deterministic ( we will always know what to expect )
 -   we can run code in parallel on seperate processors
 -   More declarative (what we want done)
 -   good for processing big data, can run on muliple processors
