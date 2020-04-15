@@ -4,7 +4,15 @@
 * Boolean
 * Undefined
 * Null
-* Symbol ( New in ECMAScript )
+* Symbol ( New in ECMAScript ) - A symbol is a unique and immutable data type. It may be used as an identifier for object properties. The Symbol object is an implicit object wrapper for the symbol primitive data type.  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol
+```
+let sym1 = Symbol();
+let sym2 = Symbol('foo');
+let sym3 = Symbol('foo');
+sym2 === sym3
+false
+```
 * Object
 
 ## Closures / Prototypal Inheritence  
