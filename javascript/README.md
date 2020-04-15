@@ -1,3 +1,17 @@
+## Types  
+* Number
+* String
+* Boolean
+* Undefined
+* Null
+* Symbol ( New in ECMAScript )
+* Object
+
+## Variables
+* var
+* let - can be reassigned as well as mutated
+* const - cannot be reassigned, however can be mutated
+
 ## Closures / Prototypal Inheritence  
 
 1. closure - a function that returns a function having access to variables in its lexical environment. "A useful way to provide instance data to a callback."
