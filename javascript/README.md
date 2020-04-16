@@ -1,3 +1,20 @@
+## Types  
+* Number
+* String
+* Boolean
+* Undefined
+* Null
+* Symbol ( New in ECMAScript ) - A symbol is a unique and immutable data type. It may be used as an identifier for object properties. The Symbol object is an implicit object wrapper for the symbol primitive data type.  
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol
+```
+let sym1 = Symbol();
+let sym2 = Symbol('foo');
+let sym3 = Symbol('foo');
+sym2 === sym3
+false
+```
+* Object
+
 ## Closures / Prototypal Inheritence  
 
 1. closure - a function that returns a function having access to variables in its lexical environment. "A useful way to provide instance data to a callback."
@@ -185,7 +202,7 @@ console.log(executioner(30));
 
 -   Many operations on fixed data
 -   stateless
--   pure functions with no side effects
+-   pure functions with no side effects - this makes functions deterministic ( we will always know what to expect )
 -   we can run code in parallel on seperate processors
 -   More declarative (what we want done)
 -   good for processing big data, can run on muliple processors
