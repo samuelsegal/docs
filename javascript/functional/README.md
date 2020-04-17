@@ -105,7 +105,7 @@ const addAndMultiplyBy3 = compose(
 console.log(addAndMultiplyBy3(5));
 ```
 
-### pipe
+### pipe - reversed version of compose
 ```
   
 const pipe = (f, g, h) => data => h(g(f(data)));
