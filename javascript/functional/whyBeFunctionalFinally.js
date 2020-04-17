@@ -1,6 +1,9 @@
 const loggy = require('../loggy');
-//THis is my implementation after learning from aneagoie excellent advanced javascript course functional section
-//Note: Alot of code is for demonstration only, such as using Object.assign rather than spread or rest paramters
+/* 
+Example of functional programming focused on composition
+THis is my implementation after learning from aneagoie excellent advanced javascript course functional section
+Note: Alot of code is for demonstration only, such as using Object.assign rather than spread or rest paramters
+*/
 // Amazon shopping
 const user = {
 	name: 'Kim',
@@ -31,9 +34,8 @@ function addItemsToCart(user, items) {
 //console.dir(user);
 // 2. Add 3% tax to item in cart
 function addSalesTax(user) {
-	console.log(user);
 	let taxPercent = 0.03;
-	user.cart.map(item => {
+	user.cart.map((item) => {
 		return (item.price += item.price * taxPercent);
 	});
 	const updatedUser = Object.assign({}, user, { cart: items });
@@ -56,8 +58,38 @@ function emptyCart(user) {
 //console.log(emptyCart(purchaseItems(addSalesTax(addItemsToCart(user, items), 0.03))));
 //console.log(user);
 
-//Compose - simply return the result of f calling the result of g
-const compose = (f, g) => (...functions) => f(g(...functions));
-const goShopping = (...functions) => functions.reduce(compose);
+//Pipe - simply return the result of g calling the result of f
+const pipe = (f, g) => (...functions) => {
+	//am including logs to help explain the currying of user and itemz here
+	console.log('##### User #####');
+	console.log(functions[0]);
+	console.log('##### Items #####');
+	console.log(functions[1]);
+	console.log('----------------');
+	return g(f(...functions));
+};
 
-loggy.log(goShopping(emptyCart, purchaseItems, addSalesTax, addItemsToCart)(user, items));
+//Or Compose - simply return the result of f calling the result of g
+const compose = (f, g) => (...functions) => {
+	//am including logs to help explain the currying of user and itemz here
+	/* 	console.log('##### User #####');
+	console.log(functions[0]);
+	console.log('##### Items #####');
+	console.log(functions[1]);
+	console.log('----------------'); */
+	return f(g(...functions));
+};
+
+const goShoppingPiped = (...functions) => functions.reduce(pipe);
+const goShoppingComposed = (...functions) => functions.reduce(compose);
+//goShopping(emptyCart, purchaseItems, addSalesTax, addItemsToCart)(user, items);
+loggy.clog(loggy.COLOR.FgBlue, 'Piped version');
+loggy.clog(loggy.COLOR.FgRed, goShoppingPiped(addItemsToCart, addSalesTax, purchaseItems, emptyCart)(user, items));
+loggy.clog(loggy.COLOR.FgBlue, 'Composed version');
+loggy.clog(loggy.COLOR.FgRed, goShoppingComposed(emptyCart, purchaseItems, addSalesTax, addItemsToCart)(user, items));
+
+loggy.clog(loggy.COLOR.FgCyan, `User after functions are applied :`);
+console.dir(user);
+const dataToStore = goShoppingComposed(purchaseItems, addSalesTax, addItemsToCart)(user, items);
+loggy.clog(loggy.COLOR.FgMagenta, `This is why we would store the returned value which is : `);
+console.dir(dataToStore);
