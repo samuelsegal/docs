@@ -193,8 +193,8 @@ console.log(executioner(30));
 
 12. Compose and Pipe - apply a stream of functions to some data.
 
--   compose - apply functions right to left. See dynamic/composeExample.js
--   pipe compose functions left to right. See dynamic/pipeExample.js
+-   compose - apply functions right to left. See [compose example](https://github.com/samuelsegal/docs/blob/master/javascript/functional/composeExample.js)
+-   pipe compose functions left to right. See [pipe example](https://github.com/samuelsegal/docs/blob/master/javascript/functional/pipeExample.js)
 
 13. Arity - Number of arguments a function takes. The fewer the better.
 
