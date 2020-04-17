@@ -27,6 +27,9 @@ When dealing with large objects and immutability, rather than copying whole obje
 
 ### HOF
 ```
-const hof = () => () return 5;
+const hof = () => () => 55;
+hof();
+
 const hof2 = fn => fn(5);
+hof2(function a(x) { return x});
 ```
