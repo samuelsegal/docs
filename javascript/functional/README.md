@@ -33,3 +33,19 @@ hof();
 const hof2 = fn => fn(5);
 hof2(function a(x) { return x});
 ```
+
+### Closure in HOF's
+```
+const closure = () => {
+  let c = 0;
+  return function increment(){
+    c++;
+    return c;
+  }
+}
+const incFn = closure();
+incFn();
+incFn();
+incFn();
+//3
+```
