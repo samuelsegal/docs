@@ -34,7 +34,7 @@ const hof2 = fn => fn(5);
 hof2(function a(x) { return x});
 ```
 
-### Closure in HOF's
+### Closure in HOF's - way to privatize variables
 ```
 const closure = () => {
   let c = 0;
