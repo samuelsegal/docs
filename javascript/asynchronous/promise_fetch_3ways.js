@@ -6,24 +6,32 @@ const urls = [
 ];
 
 Promise.all(
-	urls.map(url => {
-		return fetch(url).then(resp => resp.json());
+	urls.map((url) => {
+		return fetch(url).then((resp) => resp.json());
 	})
 )
-	.then(results => {
+	.then((results) => {
 		console.log(results[0]);
 		console.log(results[1]);
 		console.log(results[2]);
 	})
-	.catch(err => console.log('Error: ', err))
+	.catch((err) => console.log('Error: ', err))
 	.finally(() => console.log('finally'));
 
 //Same thing using Async Await
-const getData = async function() {
+const getData = async function () {
 	try {
-		const [users, posts, albums] = await Promise.all(
+		//Commented out different syntax for reference, both work
+		/*
+	 	const [users, posts, albums] = await Promise.all(
 			urls.map(url => {
 				return fetch(url).then(resp => resp.json());
+			})
+		); */
+		const [users, posts, albums] = await Promise.all(
+			urls.map(async function (url) {
+				const response = await fetch(url);
+				return response.json();
 			})
 		);
 		console.log('users: ', users);
@@ -36,11 +44,11 @@ const getData = async function() {
 		console.log('Once and for all');
 	}
 };
-//getData();
+getData();
 
 //Same thingh usinf `for await of`
-const fetchPosts2 = async function() {
-	const arrayOfPromises = urls.map(url => fetch(url));
+const fetchPosts2 = async function () {
+	const arrayOfPromises = urls.map((url) => fetch(url));
 	for await (let request of arrayOfPromises) {
 		const data = await request.json();
 		console.log('for await of: ', data);
