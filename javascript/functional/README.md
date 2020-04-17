@@ -10,3 +10,11 @@ Math.abs(Math.abs(Math.abs(-50)))
 ```
 
 ### Imperative vs. Declarative
+
+* Imperative - Machine code
+```
+for (let i = 1; i < 1000; i++) {
+  console.log(i)
+}
+```
+* Declarative - a higher level language such as javascript
