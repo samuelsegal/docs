@@ -36,16 +36,26 @@ hof2(function a(x) { return x});
 
 ### Closure in HOF's - way to privatize variables
 ```
-const closure = () => {
-  let c = 0;
-  return function increment(){
-    c++;
-    return c;
-  }
+//closure that also is an impure function
+const closure = function(){
+    let count = 0;
+    return function increment(){
+        return ++count;
+
+    }
 }
-const incFn = closure();
-incFn();
-incFn();
-incFn();
-//3
+const increment = closure();
+increment();
+increment();
+increment();
+
+//closure that also is a pure function
+const closure = function(){
+    let count = 0;
+    return function getCounter(){
+        return count;
+
+    }
+}
+const c = getCount();
 ```
