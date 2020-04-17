@@ -93,7 +93,8 @@ console.log(executioner(30));
 console.log(executioner(30));
 ```
 
-### compose 
+### compose
+Make one function out of many other functions. _lodash is an example library that has this feature
 ```
 const compose = (f, g) => data => f(g(data));
 const multiplyBy3 = num => num * 3;
