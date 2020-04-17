@@ -2,6 +2,7 @@
 Similar goals to OOP as far as modularizing. THey both want to seperate code into reusable packages. Functional is different in that it seperates the data from the behavior.
 * Pure Functions: All objects are immutable. We avoid shared state.
 * Minimize side effects: Do not mutate data, instead RETURN new data. This is how we avoid sharing state. Pure functions have no side effects. However not everything can be pure functinos of course then the program would have no side effects and do nothing.
+* A good exampleof putting functional programming to use - https://repl.it/@aneagoie/FP-9
 
 ### Idempotence  
 A function that always returns the same result, no matter how many times the function is abused even recursively.
