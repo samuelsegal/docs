@@ -19,5 +19,5 @@ for (let i = 1; i < 5; i++) {
 ```
 * Declarative - a higher level language such as javascript
 ```
-[1,2,3,4,5].forEach(i=>console.log(i))l;
+[1,2,3,4,5].forEach(i=>console.log(i));
 ```
