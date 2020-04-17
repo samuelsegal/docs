@@ -21,3 +21,12 @@ for (let i = 1; i < 5; i++) {
 ```
 [1,2,3,4,5].forEach(i=>console.log(i));
 ```
+
+### Structural Sharing
+When dealing with large objects and immutability, rather than copying whole object to support immutability we only copy the small parts we update so the overall object is not copied into memory. To support immutability efficiently.
+
+### HOF
+```
+const hof = () => () return 5;
+const hof2 = fn => fn(5);
+```
