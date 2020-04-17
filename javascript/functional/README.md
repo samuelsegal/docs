@@ -93,4 +93,30 @@ console.log(executioner(30));
 console.log(executioner(30));
 ```
 
+### compose 
+```
+const compose = (f, g) => data => f(g(data));
+const multiplyBy3 = num => num * 3;
+const add3 = num => num + 3;
+const addAndMultiplyBy3 = compose(
+	multiplyBy3,
+	add3
+);
+console.log(addAndMultiplyBy3(5));
+```
+
+### pipe
+```
+  
+const pipe = (f, g, h) => data => h(g(f(data)));
+const multiplyBy3 = num => num * 3;
+const add3 = num => num + 3;
+const abs = num => Math.abs(num);
+const muliplyBy3Add3Absolute = pipe(
+	multiplyBy3,
+	add3,
+	abs
+);
+console.log(muliplyBy3Add3Absolute(-5));
+```
 
