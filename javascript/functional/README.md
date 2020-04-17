@@ -1,4 +1,12 @@
 ## Functional
 Similar goals to OOP as far as modularizing. THey both want to seperate code into reusable packages. Functional is different in that it seperates the data from the behavior.
 * Pure Functions: All objects are immutable. We avoid shared state.
-* No side effects: Do not mutate data, instead RETURN new data. This is how avoid sharing state.
+* Minimize side effects: Do not mutate data, instead RETURN new data. This is how we avoid sharing state. Pure functions have no side effects. However not everything can be pure functinos of course then the program would have no side effects and do nothing.
+
+### Idempotence  
+A function that always returns the same result, no matter how many times the function is abused even recursively.
+```
+Math.abs(Math.abs(Math.abs(-50)))
+```
+
+### Imperative vs. Declarative
