@@ -2,6 +2,8 @@
 Similar goals to OOP as far as modularizing. THey both want to seperate code into reusable packages. Functional is different in that it seperates the data from the behavior.
 * Pure Functions: All objects are immutable. We avoid shared state.
 * Minimize side effects: Do not mutate data, instead RETURN new data. This is how we avoid sharing state. Pure functions have no side effects. However not everything can be pure functinos of course then the program would have no side effects and do nothing.
+* A final [example](https://github.com/samuelsegal/docs/blob/master/javascript/functional/whyBeFunctionalFinally.js) of putting functional programming to use inspired by recommended course for advanced js:  
+https://www.udemy.com/course/advanced-javascript-concepts/learn/lecture/13829728#overview
 
 ### Idempotence  
 A function that always returns the same result, no matter how many times the function is abused even recursively.
@@ -93,7 +95,8 @@ console.log(executioner(30));
 console.log(executioner(30));
 ```
 
-### compose 
+### compose
+Make one function out of many other functions. _lodash is an example library that has this feature
 ```
 const compose = (f, g) => data => f(g(data));
 const multiplyBy3 = num => num * 3;
