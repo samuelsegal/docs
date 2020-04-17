@@ -13,8 +13,11 @@ Math.abs(Math.abs(Math.abs(-50)))
 
 * Imperative - Machine code
 ```
-for (let i = 1; i < 1000; i++) {
+for (let i = 1; i < 5; i++) {
   console.log(i)
 }
 ```
 * Declarative - a higher level language such as javascript
+```
+[1,2,3,4,5].forEach(i=>console.log(i))l;
+```
