@@ -9,13 +9,17 @@ const compose = (f, g) => (...args) => f(g(...args));
 const pipe = (f, g) => (...args) => g(f(...args));
 const purchaseItem = (...fns) => fns.reduce(compose);
 const purchaseItem2 = (...fns) => fns.reduce(pipe);
-purchaseItem2(addItemToCart, applyTaxToItems, buyItem)(user, [
+purchaseItem2(
+	addItemToCart,
+	applyTaxToItems,
+	buyItem
+)(user, [
 	{ name: 'laptop', price: 50 },
 	{ name: 'laptop', price: 60 },
 ]);
 
 console.log(history1);
-console.log(user);
+console.log(history1[1].cart);
 // purchaseItem(
 //   emptyUserCart,
 //   buyItem,
@@ -25,7 +29,9 @@ console.log(user);
 function addItemToCart(user, item) {
 	history1.push(user);
 	const updatedCart = user.cart.concat(item);
-	return Object.assign({}, user, { cart: updatedCart });
+	//prefering esnext syntax vs Object.assign for example of both
+	return { ...user, cart: updatedCart };
+	//return Object.assign({}, user, { cart: updatedCart });
 }
 //function addItemsToCart()
 
@@ -33,12 +39,13 @@ function applyTaxToItems(user) {
 	history1.push(user);
 	const { cart } = user;
 	const taxRate = 1.3;
-	const updatedCart = cart.map(item => {
+	const updatedCart = cart.map((item) => {
 		return {
 			name: item.name,
 			price: item.price * taxRate,
 		};
 	});
+	//return { ...user, cart: updatedCart };
 	return Object.assign({}, user, { cart: updatedCart });
 }
 
