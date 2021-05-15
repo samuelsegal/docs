@@ -16,9 +16,10 @@ io.on('connection', (socket) => {
 		console.log(dataFromClient);
 	});
 	socket.on('msgToServer', (msg) => {
-		console.log(msg);
-		io.emit('msgToClients', { text: msg.text });
+		io.emit('msgToClients', msg);
 	});
+	socket.join('level1');
+	socket.to('level1').emit('joined', `${socket.id} has joined level 1`);
 });
 
 // Connection for /admin namespace
