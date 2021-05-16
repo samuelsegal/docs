@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs';
 
 // step switcher
-let switcherValueObservable = (function () {
+let switcherValueObservable = (() => {
 	let switcherSubject = new Subject();
 	let step1 = document.querySelector('.step-one');
 	let step2 = document.querySelector('.step-two');
@@ -19,7 +19,7 @@ let switcherValueObservable = (function () {
 	return switcherSubject.asObservable();
 })();
 
-function createCounter(selector, stepObservable) {
+const createCounter = (selector, stepObservable) => {
 	let counter = 0;
 	let step = 1;
 
@@ -31,8 +31,8 @@ function createCounter(selector, stepObservable) {
 		counter = counter + step;
 		counterElement.innerHTML = counter;
 	}, 1000);
-}
+};
 
 createCounter('.counter', switcherValueObservable);
-//createCounter('.counter2', switcherValueObservable)
-//createCounter('.counter3', switcherValueObservable
+createCounter('.counter2', switcherValueObservable);
+createCounter('.counter3', switcherValueObservable);
