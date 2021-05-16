@@ -1,7 +1,10 @@
 import { fromEvent } from 'rxjs';
 import _ from 'lodash';
-import './style.css';
+import './domDraw.css';
 
+/**
+ * Draws to the document.body. Created to learn a bit of RxJs
+ */
 let drawNow = false;
 
 const draw = (x, y) => {
@@ -11,11 +14,11 @@ const draw = (x, y) => {
 	el.style.left = x + 'px';
 	document.body.appendChild(el);
 };
-const mousemove = fromEvent(document, 'mousemove');
-const mousedown = fromEvent(document, 'mousedown');
-const mouseup = fromEvent(document, 'mouseup');
+const mousemoveObservable = fromEvent(document, 'mousemove');
+const mousedownObservable = fromEvent(document, 'mousedown');
+const mouseupObservable = fromEvent(document, 'mouseup');
 
-const onMouseDown = {
+const mousedownObserver = {
 	next: (e) => {
 		drawNow = true;
 		draw(e.clientX, e.clientY);
@@ -24,7 +27,7 @@ const onMouseDown = {
 	complete: () => console.log('complete'),
 };
 
-const onMouseMove = {
+const mousemoveObserver = {
 	next: (e) => {
 		if (drawNow) draw(e.clientX, e.clientY);
 	},
@@ -32,15 +35,15 @@ const onMouseMove = {
 	complete: () => console.log('complete'),
 };
 
-const mousedownSubscriber = mousedown.subscribe(onMouseDown);
-const mouseupSubscriber = mouseup.subscribe((e) => (drawNow = false));
-const mousemoveSubscriber = mousemove.subscribe(onMouseMove);
+const mousedownSubscription = mousedownObservable.subscribe(mousedownObserver);
+const mouseupSubscription = mouseupObservable.subscribe((e) => (drawNow = false));
+const mousemoveSubscription = mousemoveObservable.subscribe(mousemoveObserver);
 
 setTimeout((e) => {
-	mousedownSubscriber.add(mouseupSubscriber);
-	mousemoveSubscriber.add(mousedownSubscriber);
-	onMouseDown.complete();
-	onMouseMove.complete();
-	onMouseMove.error('asdfvaevdf');
-	mousemoveSubscriber.unsubscribe();
+	mousedownSubscription.add(mouseupSubscription);
+	mousemoveSubscription.add(mousedownSubscription);
+	mousedownObserver.complete();
+	mousemoveObserver.complete();
+	mousemoveObserver.error('asdfvaevdf');
+	mousemoveSubscription.unsubscribe();
 }, 5000);
