@@ -32,6 +32,10 @@ const mousedownObservable = fromEvent(document, 'mousedown').pipe(
 	tap(mousedownObserver),
 	finalize(() => {
 		console.log('5 attempts to draw have completed, unsubscribing mouseup and move upon downs take of 5');
+		let div = document.createElement('div');
+		div.innerHTML = '<h2>Finito!</h2>';
+		document.body.appendChild(div);
+		mousemoveSubscription.add(mousedownSubscription);
 		mouseupSubscription.add(mousemoveSubscription);
 		mouseupSubscription.unsubscribe();
 		//mousemoveSubscription.unsubscribe();
