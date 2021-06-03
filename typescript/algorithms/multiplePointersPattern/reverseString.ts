@@ -1,8 +1,8 @@
-import { swapES2015 } from '../sorting/swap';
+import { swap } from '../sorting/swap';
 export const reverseStrMultiPointer = (str: string) => {
 	const arr = str.split('');
 	for (let i = 0, j = str.length - 1; i < j; ) {
-		swapES2015(arr, i++, j--);
+		swap(arr, i++, j--);
 	}
 	return arr.join('');
 };
