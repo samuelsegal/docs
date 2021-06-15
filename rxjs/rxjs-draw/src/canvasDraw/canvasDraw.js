@@ -1,5 +1,16 @@
 import { combineLatest, fromEvent, merge } from 'rxjs';
+import { combineLatestInit } from 'rxjs/internal/observable/combineLatest';
 import { combineLatestWith, filter, map } from 'rxjs/operators';
+/**
+ * TODO: these need to be subjects that emit data to many subscribers.
+ * super simple, jut check your todos and doit foo.
+ * of course also mixed with streaming data type from server
+ * via events of data creation, super simple. just do it.
+ * these need to update message broker or whatever server with draw points an
+ * actions. those then send SSE or streaming whatever to clients
+ * which should be alot like these. So after monte carlos at the lenadings
+ * you need to land into just doing this and erasing this message once done.
+ */
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 context.canvas.width = window.innerWidth;
@@ -33,27 +44,34 @@ const clickMoveObservable$ = mouseClicksObservable$.pipe(
 		return { clickType, position };
 	})
 );
-const dragDownObservable$ = clickMoveObservable$.pipe(filter(({ clickType }) => clickType === 'mousedown'));
+const dragDownObservable$ = clickMoveObservable$.pipe(filter(({ clickType }) => clickType == 'mousedown'));
+let isUp = false;
 dragDownObservable$.subscribe({
 	next: ({ clickType, position }) => {
+		console.log(clickType);
 		const { x, y } = position;
-		context.lineTo(x, y);
-		//context.moveTo(x, y);
-		context.stroke();
+		//isUp is a side effect mus revisit
+		//on initial
+		if (!isUp) {
+			context.lineTo(x, y);
+		} else {
+			isUp = false;
+		}
 		context.moveTo(x, y);
+		context.stroke();
 	},
 });
 mousedownObservable$.subscribe({
 	next: ({ position }) => {
 		const { x, y } = position;
-		//context.moveTo(x, y);
-		//context.stroke();
+		context.beginPath();
 	},
 });
 
 mouseupObservable$.subscribe({
 	next: ({ position }) => {
-		//console.log(position);
-		//context.stroke();
+		context.closePath();
+		isUp = true;
+		context.stroke();
 	},
 });
