@@ -2,18 +2,16 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 module.exports = {
 	entry: {
-		/*
 		domDraw: './src/domDraw/domDraw.js',
 		friendSuggestion: './src/friendSuggestion/friendSuggestion.js',
 		introduction: './src/introduction/introduction.js',
-		coldObservables: './src/introduction/coldObservables.js', 
+		coldObservables: './src/introduction/coldObservables.js',
 		hotObservables: './src/introduction/hotObservables.js',
 		creationFunctions: './src/introduction/creationFunctions.js',
 		tempConverter: './src/introduction/tempConverter.js',
 		filter: './src/introduction/pipeable/filter.js',
 		debounceTime: './src/introduction/pipeable/debounce.js',
-		operators: './src/introduction/pipeable/operators.js', 
-		*/
+		operators: './src/introduction/pipeable/operators.js',
 		fetchEndpoint: './src/introduction/pipeable/fetchEndpoint.js',
 	},
 	plugins: [
