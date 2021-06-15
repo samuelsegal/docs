@@ -1,6 +1,6 @@
 import { combineLatest, fromEvent, merge } from 'rxjs';
 import { combineLatestInit } from 'rxjs/internal/observable/combineLatest';
-import { combineLatestWith, filter, map } from 'rxjs/operators';
+import { combineLatestWith, delay, filter, map } from 'rxjs/operators';
 /**
  * TODO: these need to be subjects that emit data to many subscribers.
  * super simple, jut check your todos and doit foo.
@@ -44,19 +44,17 @@ const clickMoveObservable$ = mouseClicksObservable$.pipe(
 		return { clickType, position };
 	})
 );
-const dragDownObservable$ = clickMoveObservable$.pipe(filter(({ clickType }) => clickType == 'mousedown'));
-let isUp = false;
+const dragDownObservable$ = clickMoveObservable$.pipe(
+	filter(({ clickType }) => clickType == 'mousedown'),
+	delay(25)
+	//TODO: maybe hacky as it depends on time delay to avoid lineTo connecting from last drag
+	//however it works and requires no side effects so, good for now.
+);
 dragDownObservable$.subscribe({
 	next: ({ clickType, position }) => {
 		console.log(clickType);
 		const { x, y } = position;
-		//isUp is a side effect mus revisit
-		//on initial
-		if (!isUp) {
-			context.lineTo(x, y);
-		} else {
-			isUp = false;
-		}
+		context.lineTo(x, y);
 		context.moveTo(x, y);
 		context.stroke();
 	},
@@ -71,7 +69,6 @@ mousedownObservable$.subscribe({
 mouseupObservable$.subscribe({
 	next: ({ position }) => {
 		context.closePath();
-		isUp = true;
 		context.stroke();
 	},
 });
