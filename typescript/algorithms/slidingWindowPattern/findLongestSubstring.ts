@@ -4,8 +4,8 @@
  * Time Complexity: 0(n)
  * findLongestSubstring('ddddd') //1
  */
-(function() {
-	const findLongestSubstring = (str: string): number => {
+(function () {
+	const findLongestSubstring = (str) => {
 		let distinctWindow = {};
 		let j = 0;
 		let len = 0;
@@ -13,7 +13,9 @@
 			let key = str[i];
 			//everytime we find a match move left pointer to the index of where matched
 			if (distinctWindow[key]) {
+				console.log('window', distinctWindow);
 				console.log('numbre', distinctWindow[key]);
+				console.log('key', key);
 				j = Math.max(j, distinctWindow[key]);
 			}
 			//always set length to the longest of itself or i - j + 1
