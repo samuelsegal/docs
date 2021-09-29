@@ -44,8 +44,8 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 			String authorizationHeader = request.getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
 			String jwt = authorizationHeader.replace("Bearer ", "");
 			
-			log.info("JWT:");
-			log.info(jwt);
+			log.debug("JWT:");
+			log.debug(jwt);
 			
 			if(!isJwtValid(jwt)) {
 				return OnError(exchange, "Invalid JWT!", HttpStatus.UNAUTHORIZED);
@@ -62,17 +62,23 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 	
 	private boolean isJwtValid(String jwt) {
 		boolean isValid = true;
-		
+		try {
 		String subject = Jwts.parser()
 			.setSigningKey(env.getProperty("token.secret"))
 			.parseClaimsJws(jwt)
 			.getBody()
 			.getSubject();
 		
-		if(subject == null || subject.isEmpty()) {
-			return false;
+			if(subject == null || subject.isEmpty()) {
+				return false;
+			}
+		}catch(Exception e) {
+			isValid = false;
+			log.error(String.format(
+					"Exception thrown validating JWT :: %s", 
+					e.getMessage()), e);
 		}
-		
+
 		return isValid;
 	}
 }

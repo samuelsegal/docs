@@ -39,14 +39,17 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userService).passwordEncoder(bcruyptBCryptPasswordEncoder);
+		auth.userDetailsService(userService)
+			.passwordEncoder(bcruyptBCryptPasswordEncoder);
 	}
 	
 	private Filter getAuthenticationFilter() throws Exception {
-		AuthenticationFilter authFilter = new AuthenticationFilter(
-												userService, env, 
-												authenticationManager());
-		authFilter.setFilterProcessesUrl(env.getProperty(("login.url.path")));
+		AuthenticationFilter authFilter = 
+				new AuthenticationFilter(
+						userService, env, 
+						authenticationManager());
+		authFilter.setFilterProcessesUrl(
+				env.getProperty(("login.url.path")));
 		return authFilter;
 	}
 
