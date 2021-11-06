@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sms.photoapp.api.users.model.LoginRequestModel;
-import com.sms.photoapp.api.users.model.UserRequestModel;
+import com.sms.photoapp.api.users.model.UserResponseModel;
 import com.sms.photoapp.api.users.service.UserService;
 
 import io.jsonwebtoken.Jwts;
@@ -62,7 +62,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 			FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
 		String username = ((User) authResult.getPrincipal()).getUsername();
-		UserRequestModel ur = userService.getUserDetailsByEmail(username);
+		UserResponseModel ur = userService.getUserDetailsByEmail(username);
 		
 		String token = Jwts.builder()
 				.setSubject(ur.getUserid())

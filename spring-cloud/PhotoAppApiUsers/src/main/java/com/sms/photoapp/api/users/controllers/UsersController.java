@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -53,25 +51,24 @@ public class UsersController {
 				produces= { MediaType.APPLICATION_JSON_VALUE, 
 							MediaType.APPLICATION_XML_VALUE }
 	)
-	public ResponseEntity<UserRequestModel> getUser(@PathVariable String userid) {
+	public ResponseEntity<UserResponseModel> getUser(@PathVariable String userid) {
 		
-		UserRequestModel user = userService.getUser(userid);
+		//UserResponseModel user = userService.getUser(userid);
+		UserResponseModel user = userService.getUserByUserId(userid);
 		if(user != null) {
+
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
 		
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	@PostMapping(consumes={ MediaType.APPLICATION_JSON_VALUE, 
 							MediaType.APPLICATION_XML_VALUE },
 				 produces={ MediaType.APPLICATION_JSON_VALUE, 
 							MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<UserResponseModel> createUser(@Valid @RequestBody UserRequestModel user) {
-		UserRequestModel urequest = userService.createUser(user);
-		ModelMapper modelMapper = new ModelMapper();
-		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		UserResponseModel uresponse = modelMapper.map(urequest, UserResponseModel.class);
+		UserResponseModel uresponse = userService.createUser(user);
 		return new ResponseEntity<>(uresponse, HttpStatus.CREATED);
 	}
 	
@@ -80,14 +77,13 @@ public class UsersController {
 							MediaType.APPLICATION_XML_VALUE},
 				produces={MediaType.APPLICATION_JSON_VALUE,  
 							MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<UserRequestModel> updateUser(@PathVariable String userid, 
+	public ResponseEntity<UserResponseModel> updateUser(@PathVariable String userid, 
 												@RequestBody UserRequestModel user) {
-		UserRequestModel userRequestModel = userService.updateUser(userid, user);
+		UserResponseModel userRequestModel = userService.updateUser(userid, user);
 		if(userRequestModel != null) {
-			return new ResponseEntity<UserRequestModel>(userRequestModel, HttpStatus.OK);
+			return new ResponseEntity<UserResponseModel>(userRequestModel, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
 		
 	}
 	
@@ -97,4 +93,6 @@ public class UsersController {
 		return ResponseEntity.noContent().build();
 		
 	}
+	
+
 }

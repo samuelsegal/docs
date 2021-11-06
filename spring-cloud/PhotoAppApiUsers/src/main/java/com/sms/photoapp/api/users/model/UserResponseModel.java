@@ -1,5 +1,7 @@
 package com.sms.photoapp.api.users.model;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,5 +17,6 @@ public class UserResponseModel {
 	private String lastName;
 	private String email;
 	private String userid;
+	private List<AlbumResponseModel> albums;
 	
 }

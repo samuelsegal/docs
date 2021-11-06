@@ -13,10 +13,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.sms.photoapp.api.users.service.UserService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 @RequiredArgsConstructor
+@Slf4j
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
 	private final Environment env;
@@ -48,8 +50,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 				new AuthenticationFilter(
 						userService, env, 
 						authenticationManager());
-		authFilter.setFilterProcessesUrl(
-				env.getProperty(("login.url.path")));
+		log.info("ENVVVVVIIIIRRRRONMEN: " + env.getProperty("login.url.path"));
+		log.info("ENVVVVVIIIIRRRRONMEN: " + env.getProperty("gateway.ip"));
+		log.info("ENVVVVVIIIIRRRRONMEN: " + env.getProperty("token.secret"));
+		
+		authFilter.setFilterProcessesUrl(env.getProperty("login.url.path"));
 		return authFilter;
 	}
 
